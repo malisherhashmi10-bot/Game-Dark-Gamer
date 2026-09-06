@@ -21,7 +21,7 @@ body{
     color:white;
 }
 
-/* MAIN GAME */
+/* GAME */
 
 #game{
     width:360px;
@@ -29,59 +29,18 @@ body{
     max-width:100vw;
     max-height:100vh;
     margin:auto;
+
     position:relative;
     overflow:hidden;
 
-    background:linear-gradient(
-        180deg,
-        #111,
-        #333,
-        #111
-    );
+    background:#333;
 
-    border-left:8px solid #00ffff;
-    border-right:8px solid #ff00ff;
+    border-left:7px solid #00ffff;
+    border-right:7px solid #ff00ff;
 
     box-shadow:
-        0 0 20px #00ffff,
-        0 0 40px #ff00ff;
-}
-
-/* ANIMATED BACKGROUND */
-
-#game::before{
-    content:"";
-    position:absolute;
-    width:100%;
-    height:100%;
-
-    background:
-        radial-gradient(
-            circle at 20% 20%,
-            rgba(255,0,255,.25),
-            transparent 25%
-        ),
-        radial-gradient(
-            circle at 80% 70%,
-            rgba(0,255,255,.25),
-            transparent 25%
-        );
-
-    animation:bgMove 4s infinite alternate;
-}
-
-@keyframes bgMove{
-
-    0%{
-        filter:hue-rotate(0deg);
-        transform:scale(1);
-    }
-
-    100%{
-        filter:hue-rotate(180deg);
-        transform:scale(1.3);
-    }
-
+        0 0 15px #00ffff,
+        0 0 30px #ff00ff;
 }
 
 /* ROAD */
@@ -93,16 +52,127 @@ body{
     background:#333;
 }
 
+/* ANIMATED LIGHT */
+
+#road::after{
+    content:"";
+
+    position:absolute;
+
+    width:200%;
+    height:200%;
+
+    left:-50%;
+    top:-50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,0,255,.15),
+            transparent 30%
+        );
+
+    animation:
+        roadGlow 4s infinite alternate;
+}
+
+@keyframes roadGlow{
+
+    0%{
+        transform:rotate(0deg);
+        filter:hue-rotate(0deg);
+    }
+
+    100%{
+        transform:rotate(20deg);
+        filter:hue-rotate(180deg);
+    }
+}
+
 /* ROAD LINES */
 
 .line{
     position:absolute;
+
     width:8px;
     height:90px;
+
     background:white;
+
     left:50%;
+
     transform:translateX(-50%);
+
     box-shadow:0 0 10px white;
+
+    z-index:2;
+}
+
+/* TITLE */
+
+#title{
+    position:absolute;
+
+    top:45px;
+
+    width:100%;
+
+    text-align:center;
+
+    font-size:18px;
+    font-weight:bold;
+
+    color:white;
+
+    text-shadow:
+        0 0 5px #00ffff,
+        0 0 15px #ff00ff;
+
+    z-index:20;
+}
+
+/* SCORE */
+
+#score{
+    position:absolute;
+
+    top:10px;
+    left:10px;
+
+    background:#000;
+
+    color:#00ffff;
+
+    padding:7px 10px;
+
+    border:2px solid #00ffff;
+
+    border-radius:7px;
+
+    font-weight:bold;
+
+    z-index:25;
+}
+
+/* MUSIC */
+
+#music{
+    position:absolute;
+
+    top:10px;
+    right:10px;
+
+    padding:7px 9px;
+
+    background:#111;
+
+    color:#00ffff;
+
+    border:2px solid #00ffff;
+
+    border-radius:7px;
+
+    z-index:25;
 }
 
 /* PLAYER CAR */
@@ -115,14 +185,16 @@ body{
 
     left:155px;
 
-    /* CAR کو اوپر کیا گیا */
-    bottom:105px;
+    /*
+       🚗 CAR کو کافی اوپر رکھا گیا
+    */
+    bottom:155px;
 
     background:
         linear-gradient(
             90deg,
-            #ff0000,
-            #ff5555,
+            #b00000,
+            #ff2222,
             #990000
         );
 
@@ -136,10 +208,12 @@ body{
         0 0 10px red,
         0 0 25px red;
 
-    transition:transform .08s;
+    transition:
+        left .08s,
+        transform .08s;
 }
 
-/* CAR WINDOW */
+/* WINDOW */
 
 #player::before{
     content:"";
@@ -159,7 +233,7 @@ body{
     border-radius:6px;
 }
 
-/* CAR LIGHT */
+/* LIGHT */
 
 #player::after{
     content:"";
@@ -170,6 +244,7 @@ body{
     height:5px;
 
     left:5px;
+
     bottom:7px;
 
     background:#ffff00;
@@ -195,62 +270,12 @@ body{
     z-index:5;
 
     box-shadow:
-        0 0 15px blue;
+        0 0 12px blue;
 }
 
-/* SCORE */
-
-#score{
-    position:absolute;
-
-    top:12px;
-    left:12px;
-
-    color:#00ffff;
-
-    background:rgba(0,0,0,.8);
-
-    padding:8px 12px;
-
-    border:2px solid #00ffff;
-
-    border-radius:8px;
-
-    z-index:30;
-
-    font-weight:bold;
-
-    box-shadow:0 0 10px #00ffff;
-}
-
-/* TITLE */
-
-#title{
-    position:absolute;
-
-    top:50px;
-
-    width:100%;
-
-    text-align:center;
-
-    color:#fff;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    text-shadow:
-        0 0 5px #00ffff,
-        0 0 15px #ff00ff;
-
-    z-index:20;
-}
-
-/* START BUTTON */
+/* START */
 
 #start{
-
     position:absolute;
 
     z-index:40;
@@ -260,7 +285,7 @@ body{
 
     transform:translate(-50%,-50%);
 
-    padding:16px 35px;
+    padding:15px 30px;
 
     background:#ff0055;
 
@@ -270,39 +295,13 @@ body{
 
     border-radius:12px;
 
-    font-size:21px;
+    font-size:20px;
 
     font-weight:bold;
 
     box-shadow:
         0 0 15px #ff0055,
         0 0 30px #ff00ff;
-
-    cursor:pointer;
-}
-
-/* MUSIC BUTTON */
-
-#music{
-
-    position:absolute;
-
-    top:12px;
-    right:12px;
-
-    z-index:35;
-
-    background:#111;
-
-    color:#00ffff;
-
-    border:2px solid #00ffff;
-
-    border-radius:8px;
-
-    padding:8px;
-
-    cursor:pointer;
 }
 
 /* CONTROLS */
@@ -311,9 +310,12 @@ body{
 
     position:absolute;
 
-    left:0;
+    /*
+       🎮 BUTTONS کو بھی کافی اوپر کیا گیا
+    */
+    bottom:55px;
 
-    bottom:12px;
+    left:0;
 
     width:100%;
 
@@ -321,21 +323,19 @@ body{
 
     justify-content:space-between;
 
-    padding:0 15px;
+    padding:0 18px;
 
-    z-index:30;
-
-    pointer-events:auto;
+    z-index:35;
 }
 
-/* CONTROL BUTTON */
+/* BUTTON */
 
 .control{
 
-    width:105px;
-    height:58px;
+    width:110px;
+    height:62px;
 
-    background:rgba(0,0,0,.85);
+    background:rgba(0,0,0,.9);
 
     color:white;
 
@@ -343,12 +343,12 @@ body{
 
     border-radius:14px;
 
-    font-size:28px;
+    font-size:30px;
 
     font-weight:bold;
 
     box-shadow:
-        0 0 10px #00ffff;
+        0 0 12px #00ffff;
 
     touch-action:none;
 
@@ -357,9 +357,11 @@ body{
     -webkit-user-select:none;
 }
 
+/* BUTTON PRESS */
+
 .control:active{
 
-    transform:scale(.92);
+    transform:scale(.90);
 
     background:#00ffff;
 
@@ -367,20 +369,44 @@ body{
 
 }
 
-/* SMALL SCREEN */
+/* SMALL PHONE */
 
-@media(max-height:680px){
+@media(max-width:380px){
+
+    #game{
+        width:100vw;
+        height:100vh;
+    }
+
+    #player{
+        bottom:145px;
+    }
+
+    #controls{
+        bottom:45px;
+    }
+
+    .control{
+        width:100px;
+        height:58px;
+    }
+
+}
+
+/* VERY SHORT SCREEN */
+
+@media(max-height:600px){
 
     #game{
         height:100vh;
     }
 
     #player{
-        bottom:95px;
+        bottom:125px;
     }
 
     #controls{
-        bottom:8px;
+        bottom:35px;
     }
 
 }
@@ -401,29 +427,23 @@ body{
 
     </div>
 
+    <div id="score">
+        SCORE: 0
+    </div>
+
+    <div id="music">
+        🔇 MUSIC
+    </div>
 
     <div id="title">
         🔥 DARK GAMER 🔥
     </div>
 
-
-    <div id="score">
-        SCORE: 0
-    </div>
-
-
-    <button id="music">
-        🔇 MUSIC
-    </button>
-
-
     <div id="player"></div>
-
 
     <button id="start">
         🏁 START RACE
     </button>
-
 
     <!-- CONTROLS -->
 
@@ -468,9 +488,6 @@ const scoreBox =
 const game =
     document.getElementById("game");
 
-const music =
-    document.getElementById("music");
-
 
 /* VARIABLES */
 
@@ -484,14 +501,10 @@ let playing = false;
 
 let enemies = [];
 
-let leftDown = false;
-
-let rightDown = false;
-
 let enemyTimer;
 
 
-/* START GAME */
+/* START */
 
 start.onclick = function(){
 
@@ -514,18 +527,17 @@ start.onclick = function(){
 
 
     enemies.forEach(function(enemy){
-
         enemy.remove();
-
     });
 
     enemies = [];
 
 
+    clearInterval(enemyTimer);
+
+
     createEnemy();
 
-
-    clearInterval(enemyTimer);
 
     enemyTimer =
         setInterval(
@@ -560,7 +572,7 @@ function createEnemy(){
     const lane =
         lanes[
             Math.floor(
-                Math.random()*lanes.length
+                Math.random()*3
             )
         ];
 
@@ -573,13 +585,12 @@ function createEnemy(){
         "-100px";
 
 
-    const colors =
-        [
-            "#0066ff",
-            "#ff00aa",
-            "#00cc66",
-            "#ff6600"
-        ];
+    const colors = [
+        "#0066ff",
+        "#ff00aa",
+        "#00cc66",
+        "#ff6600"
+    ];
 
 
     enemy.style.background =
@@ -597,49 +608,55 @@ function createEnemy(){
 }
 
 
-/* LEFT CONTROL */
+/* MOVE LEFT */
 
 function moveLeft(){
 
     if(!playing) return;
 
-    x -= 18;
+    x -= 20;
+
 
     if(x < 15){
         x = 15;
     }
 
+
     player.style.left =
         x + "px";
 
+
     player.style.transform =
-        "rotate(-6deg)";
+        "rotate(-7deg)";
 
 }
 
 
-/* RIGHT CONTROL */
+/* MOVE RIGHT */
 
 function moveRight(){
 
     if(!playing) return;
 
-    x += 18;
+    x += 20;
+
 
     if(x > 295){
         x = 295;
     }
 
+
     player.style.left =
         x + "px";
 
+
     player.style.transform =
-        "rotate(6deg)";
+        "rotate(7deg)";
 
 }
 
 
-/* TOUCH / POINTER LEFT */
+/* MOBILE LEFT */
 
 left.addEventListener(
     "pointerdown",
@@ -653,7 +670,7 @@ left.addEventListener(
 );
 
 
-/* TOUCH / POINTER RIGHT */
+/* MOBILE RIGHT */
 
 right.addEventListener(
     "pointerdown",
@@ -694,7 +711,7 @@ document.addEventListener(
 );
 
 
-/* RESET CAR ANGLE */
+/* RESET ROTATION */
 
 document.addEventListener(
     "pointerup",
@@ -714,7 +731,7 @@ function loop(){
     if(!playing) return;
 
 
-    /* ROAD LINES */
+    /* ROAD */
 
     document
     .querySelectorAll(".line")
@@ -730,9 +747,7 @@ function loop(){
 
 
         if(y > 650){
-
             y = -100;
-
         }
 
 
@@ -777,12 +792,10 @@ function loop(){
 
 
         if(
-
             p.left < e.right &&
             p.right > e.left &&
             p.top < e.bottom &&
             p.bottom > e.top
-
         ){
 
             gameOver();
@@ -806,8 +819,6 @@ function loop(){
             scoreBox.innerText =
                 "SCORE: " + score;
 
-
-            /* INCREASE SPEED */
 
             if(score % 5 === 0){
 
@@ -841,60 +852,6 @@ function gameOver(){
     location.reload();
 
 }
-
-
-/* MUSIC BUTTON */
-
-/*
-   یہاں بعد میں اپنی MP3 فائل لگا سکتے ہیں۔
-*/
-
-let audio =
-    new Audio();
-
-audio.loop = true;
-
-
-/* MUSIC BUTTON */
-
-music.onclick = function(){
-
-    if(audio.paused){
-
-        /*
-        اپنی music file کا نام
-        یہاں لکھ سکتے ہیں:
-
-        audio.src = "phonk.mp3";
-        */
-
-        if(!audio.src){
-
-            alert(
-                "🎧 اپنی phonk.mp3 فائل upload کریں!"
-            );
-
-            return;
-
-        }
-
-        audio.play();
-
-        music.innerText =
-            "🔊 MUSIC ON";
-
-    }
-
-    else{
-
-        audio.pause();
-
-        music.innerText =
-            "🔇 MUSIC";
-
-    }
-
-};
 
 </script>
 
