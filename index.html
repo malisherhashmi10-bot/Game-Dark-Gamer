@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Racing Game</title>
+
+<title>Dark Gamer Racing</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -12,30 +15,85 @@
 }
 
 body{
-    background:#111;
+    background:#050505;
+    font-family:Arial,sans-serif;
     overflow:hidden;
-    font-family:Arial;
-    text-align:center;
+    color:white;
 }
+
+/* MAIN GAME */
 
 #game{
     width:360px;
-    height:600px;
+    height:650px;
     max-width:100vw;
+    max-height:100vh;
     margin:auto;
     position:relative;
     overflow:hidden;
-    background:#444;
-    border-left:10px solid #222;
-    border-right:10px solid #222;
+
+    background:linear-gradient(
+        180deg,
+        #111,
+        #333,
+        #111
+    );
+
+    border-left:8px solid #00ffff;
+    border-right:8px solid #ff00ff;
+
+    box-shadow:
+        0 0 20px #00ffff,
+        0 0 40px #ff00ff;
 }
+
+/* ANIMATED BACKGROUND */
+
+#game::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,0,255,.25),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(0,255,255,.25),
+            transparent 25%
+        );
+
+    animation:bgMove 4s infinite alternate;
+}
+
+@keyframes bgMove{
+
+    0%{
+        filter:hue-rotate(0deg);
+        transform:scale(1);
+    }
+
+    100%{
+        filter:hue-rotate(180deg);
+        transform:scale(1.3);
+    }
+
+}
+
+/* ROAD */
 
 #road{
     position:absolute;
     width:100%;
     height:100%;
-    background:#444;
+    background:#333;
 }
+
+/* ROAD LINES */
 
 .line{
     position:absolute;
@@ -43,73 +101,290 @@ body{
     height:90px;
     background:white;
     left:50%;
+    transform:translateX(-50%);
+    box-shadow:0 0 10px white;
 }
+
+/* PLAYER CAR */
 
 #player{
     position:absolute;
+
     width:50px;
     height:85px;
-    background:red;
-    border-radius:12px;
-    bottom:30px;
+
     left:155px;
-    z-index:10;
-    border:3px solid white;
-}
 
-.enemy{
-    position:absolute;
-    width:50px;
-    height:85px;
-    top:-100px;
+    /* CAR کو اوپر کیا گیا */
+    bottom:105px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff0000,
+            #ff5555,
+            #990000
+        );
+
+    border:3px solid white;
+
     border-radius:12px;
-    z-index:5;
-    border:3px solid white;
+
+    z-index:10;
+
+    box-shadow:
+        0 0 10px red,
+        0 0 25px red;
+
+    transition:transform .08s;
 }
 
-#score{
+/* CAR WINDOW */
+
+#player::before{
+    content:"";
+
     position:absolute;
-    top:10px;
-    left:10px;
-    color:white;
-    background:#000;
-    padding:8px;
-    z-index:20;
+
+    width:28px;
+    height:25px;
+
+    left:8px;
+    top:8px;
+
+    background:#111;
+
+    border:2px solid #00ffff;
+
     border-radius:6px;
 }
 
-#start{
+/* CAR LIGHT */
+
+#player::after{
+    content:"";
+
     position:absolute;
+
+    width:35px;
+    height:5px;
+
+    left:5px;
+    bottom:7px;
+
+    background:#ffff00;
+
+    box-shadow:
+        0 0 10px yellow;
+}
+
+/* ENEMY */
+
+.enemy{
+    position:absolute;
+
+    width:50px;
+    height:85px;
+
+    top:-100px;
+
+    border-radius:12px;
+
+    border:3px solid white;
+
+    z-index:5;
+
+    box-shadow:
+        0 0 15px blue;
+}
+
+/* SCORE */
+
+#score{
+    position:absolute;
+
+    top:12px;
+    left:12px;
+
+    color:#00ffff;
+
+    background:rgba(0,0,0,.8);
+
+    padding:8px 12px;
+
+    border:2px solid #00ffff;
+
+    border-radius:8px;
+
     z-index:30;
+
+    font-weight:bold;
+
+    box-shadow:0 0 10px #00ffff;
+}
+
+/* TITLE */
+
+#title{
+    position:absolute;
+
+    top:50px;
+
+    width:100%;
+
+    text-align:center;
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    text-shadow:
+        0 0 5px #00ffff,
+        0 0 15px #ff00ff;
+
+    z-index:20;
+}
+
+/* START BUTTON */
+
+#start{
+
+    position:absolute;
+
+    z-index:40;
+
     left:50%;
     top:50%;
+
     transform:translate(-50%,-50%);
-    padding:15px 30px;
-    background:red;
+
+    padding:16px 35px;
+
+    background:#ff0055;
+
     color:white;
-    border:0;
-    border-radius:10px;
-    font-size:20px;
+
+    border:3px solid white;
+
+    border-radius:12px;
+
+    font-size:21px;
+
+    font-weight:bold;
+
+    box-shadow:
+        0 0 15px #ff0055,
+        0 0 30px #ff00ff;
+
+    cursor:pointer;
 }
+
+/* MUSIC BUTTON */
+
+#music{
+
+    position:absolute;
+
+    top:12px;
+    right:12px;
+
+    z-index:35;
+
+    background:#111;
+
+    color:#00ffff;
+
+    border:2px solid #00ffff;
+
+    border-radius:8px;
+
+    padding:8px;
+
+    cursor:pointer;
+}
+
+/* CONTROLS */
 
 #controls{
-    width:360px;
-    max-width:100%;
-    margin:15px auto;
+
+    position:absolute;
+
+    left:0;
+
+    bottom:12px;
+
+    width:100%;
+
     display:flex;
-    justify-content:space-around;
+
+    justify-content:space-between;
+
+    padding:0 15px;
+
+    z-index:30;
+
+    pointer-events:auto;
 }
 
+/* CONTROL BUTTON */
+
 .control{
-    width:120px;
-    height:65px;
-    background:#222;
+
+    width:105px;
+    height:58px;
+
+    background:rgba(0,0,0,.85);
+
     color:white;
-    border:2px solid white;
-    border-radius:12px;
-    font-size:30px;
+
+    border:3px solid #00ffff;
+
+    border-radius:14px;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    box-shadow:
+        0 0 10px #00ffff;
+
     touch-action:none;
+
+    user-select:none;
+
+    -webkit-user-select:none;
 }
+
+.control:active{
+
+    transform:scale(.92);
+
+    background:#00ffff;
+
+    color:#000;
+
+}
+
+/* SMALL SCREEN */
+
+@media(max-height:680px){
+
+    #game{
+        height:100vh;
+    }
+
+    #player{
+        bottom:95px;
+    }
+
+    #controls{
+        bottom:8px;
+    }
+
+}
+
 </style>
 </head>
 
@@ -126,51 +401,78 @@ body{
 
     </div>
 
-    <div id="score">
-        Score: 0
+
+    <div id="title">
+        🔥 DARK GAMER 🔥
     </div>
+
+
+    <div id="score">
+        SCORE: 0
+    </div>
+
+
+    <button id="music">
+        🔇 MUSIC
+    </button>
+
 
     <div id="player"></div>
 
+
     <button id="start">
-        START
+        🏁 START RACE
     </button>
 
-</div>
 
-<div id="controls">
+    <!-- CONTROLS -->
 
-    <button class="control" id="left">
-        ⬅️
-    </button>
+    <div id="controls">
 
-    <button class="control" id="right">
-        ➡️
-    </button>
+        <button
+            class="control"
+            id="left">
+            ⬅️
+        </button>
+
+        <button
+            class="control"
+            id="right">
+            ➡️
+        </button>
+
+    </div>
 
 </div>
 
 
 <script>
 
-let player =
+/* ELEMENTS */
+
+const player =
     document.getElementById("player");
 
-let left =
+const left =
     document.getElementById("left");
 
-let right =
+const right =
     document.getElementById("right");
 
-let start =
+const start =
     document.getElementById("start");
 
-let scoreBox =
+const scoreBox =
     document.getElementById("score");
 
-let game =
+const game =
     document.getElementById("game");
 
+const music =
+    document.getElementById("music");
+
+
+/* VARIABLES */
 
 let x = 155;
 
@@ -186,8 +488,10 @@ let leftDown = false;
 
 let rightDown = false;
 
+let enemyTimer;
 
-/* START */
+
+/* START GAME */
 
 start.onclick = function(){
 
@@ -203,20 +507,34 @@ start.onclick = function(){
         x + "px";
 
     scoreBox.innerText =
-        "Score: 0";
+        "SCORE: 0";
 
     start.style.display =
         "none";
 
-    enemies.forEach(e => e.remove());
+
+    enemies.forEach(function(enemy){
+
+        enemy.remove();
+
+    });
 
     enemies = [];
 
+
     createEnemy();
 
-    setInterval(createEnemy,1200);
 
-    loop();
+    clearInterval(enemyTimer);
+
+    enemyTimer =
+        setInterval(
+            createEnemy,
+            1100
+        );
+
+
+    requestAnimationFrame(loop);
 
 };
 
@@ -227,30 +545,50 @@ function createEnemy(){
 
     if(!playing) return;
 
-    let enemy =
+
+    const enemy =
         document.createElement("div");
 
     enemy.className =
         "enemy";
 
-    let lanes =
+
+    const lanes =
         [35,155,275];
 
-    let lane =
+
+    const lane =
         lanes[
             Math.floor(
-                Math.random()*3
+                Math.random()*lanes.length
             )
         ];
+
 
     enemy.style.left =
         lane + "px";
 
+
     enemy.style.top =
         "-100px";
 
+
+    const colors =
+        [
+            "#0066ff",
+            "#ff00aa",
+            "#00cc66",
+            "#ff6600"
+        ];
+
+
     enemy.style.background =
-        "blue";
+        colors[
+            Math.floor(
+                Math.random()*colors.length
+            )
+        ];
+
 
     game.appendChild(enemy);
 
@@ -259,98 +597,114 @@ function createEnemy(){
 }
 
 
-/* LEFT BUTTON */
+/* LEFT CONTROL */
 
-left.onpointerdown = function(e){
+function moveLeft(){
 
-    e.preventDefault();
+    if(!playing) return;
 
-    leftDown = true;
+    x -= 18;
 
-};
+    if(x < 15){
+        x = 15;
+    }
 
-left.onpointerup = function(){
+    player.style.left =
+        x + "px";
 
-    leftDown = false;
+    player.style.transform =
+        "rotate(-6deg)";
 
-};
-
-left.onpointercancel = function(){
-
-    leftDown = false;
-
-};
-
-left.onpointerleave = function(){
-
-    leftDown = false;
-
-};
+}
 
 
-/* RIGHT BUTTON */
+/* RIGHT CONTROL */
 
-right.onpointerdown = function(e){
+function moveRight(){
 
-    e.preventDefault();
+    if(!playing) return;
 
-    rightDown = true;
+    x += 18;
 
-};
+    if(x > 295){
+        x = 295;
+    }
 
-right.onpointerup = function(){
+    player.style.left =
+        x + "px";
 
-    rightDown = false;
+    player.style.transform =
+        "rotate(6deg)";
 
-};
+}
 
-right.onpointercancel = function(){
 
-    rightDown = false;
+/* TOUCH / POINTER LEFT */
 
-};
+left.addEventListener(
+    "pointerdown",
+    function(e){
 
-right.onpointerleave = function(){
+        e.preventDefault();
 
-    rightDown = false;
+        moveLeft();
 
-};
+    }
+);
+
+
+/* TOUCH / POINTER RIGHT */
+
+right.addEventListener(
+    "pointerdown",
+    function(e){
+
+        e.preventDefault();
+
+        moveRight();
+
+    }
+);
 
 
 /* KEYBOARD */
 
-document.onkeydown = function(e){
+document.addEventListener(
+    "keydown",
+    function(e){
 
-    if(e.key === "ArrowLeft"){
+        if(e.key === "ArrowLeft"){
 
-        leftDown = true;
+            e.preventDefault();
 
-    }
+            moveLeft();
 
-    if(e.key === "ArrowRight"){
-
-        rightDown = true;
-
-    }
-
-};
+        }
 
 
-document.onkeyup = function(e){
+        if(e.key === "ArrowRight"){
 
-    if(e.key === "ArrowLeft"){
+            e.preventDefault();
 
-        leftDown = false;
+            moveRight();
+
+        }
 
     }
+);
 
-    if(e.key === "ArrowRight"){
 
-        rightDown = false;
+/* RESET CAR ANGLE */
+
+document.addEventListener(
+    "pointerup",
+    function(){
+
+        player.style.transform =
+            "rotate(0deg)";
 
     }
-
-};
+);
 
 
 /* GAME LOOP */
@@ -360,40 +714,6 @@ function loop(){
     if(!playing) return;
 
 
-    /* CAR MOVEMENT */
-
-    if(leftDown){
-
-        x -= 6;
-
-    }
-
-    if(rightDown){
-
-        x += 6;
-
-    }
-
-
-    /* ROAD LIMIT */
-
-    if(x < 15){
-
-        x = 15;
-
-    }
-
-    if(x > 295){
-
-        x = 295;
-
-    }
-
-
-    player.style.left =
-        x + "px";
-
-
     /* ROAD LINES */
 
     document
@@ -401,15 +721,20 @@ function loop(){
     .forEach(function(line){
 
         let y =
-            parseFloat(line.style.top);
+            parseFloat(
+                line.style.top
+            );
+
 
         y += speed;
 
-        if(y > 600){
+
+        if(y > 650){
 
             y = -100;
 
         }
+
 
         line.style.top =
             y + "px";
@@ -420,18 +745,23 @@ function loop(){
     /* ENEMIES */
 
     for(
-        let i=enemies.length-1;
-        i>=0;
+        let i = enemies.length - 1;
+        i >= 0;
         i--
     ){
 
-        let enemy =
+        const enemy =
             enemies[i];
 
+
         let y =
-            parseFloat(enemy.style.top);
+            parseFloat(
+                enemy.style.top
+            );
+
 
         y += speed;
+
 
         enemy.style.top =
             y + "px";
@@ -439,28 +769,23 @@ function loop(){
 
         /* COLLISION */
 
-        let p =
+        const p =
             player.getBoundingClientRect();
 
-        let e =
+        const e =
             enemy.getBoundingClientRect();
 
 
         if(
+
             p.left < e.right &&
             p.right > e.left &&
             p.top < e.bottom &&
             p.bottom > e.top
+
         ){
 
-            playing = false;
-
-            alert(
-                "GAME OVER!\nScore: "
-                + score
-            );
-
-            location.reload();
+            gameOver();
 
             return;
 
@@ -469,7 +794,7 @@ function loop(){
 
         /* SCORE */
 
-        if(y > 600){
+        if(y > 650){
 
             enemy.remove();
 
@@ -477,9 +802,12 @@ function loop(){
 
             score++;
 
-            scoreBox.innerText =
-                "Score: " + score;
 
+            scoreBox.innerText =
+                "SCORE: " + score;
+
+
+            /* INCREASE SPEED */
 
             if(score % 5 === 0){
 
@@ -495,6 +823,78 @@ function loop(){
     requestAnimationFrame(loop);
 
 }
+
+
+/* GAME OVER */
+
+function gameOver(){
+
+    playing = false;
+
+    clearInterval(enemyTimer);
+
+    alert(
+        "💥 GAME OVER!\n\n" +
+        "🏆 SCORE: " + score
+    );
+
+    location.reload();
+
+}
+
+
+/* MUSIC BUTTON */
+
+/*
+   یہاں بعد میں اپنی MP3 فائل لگا سکتے ہیں۔
+*/
+
+let audio =
+    new Audio();
+
+audio.loop = true;
+
+
+/* MUSIC BUTTON */
+
+music.onclick = function(){
+
+    if(audio.paused){
+
+        /*
+        اپنی music file کا نام
+        یہاں لکھ سکتے ہیں:
+
+        audio.src = "phonk.mp3";
+        */
+
+        if(!audio.src){
+
+            alert(
+                "🎧 اپنی phonk.mp3 فائل upload کریں!"
+            );
+
+            return;
+
+        }
+
+        audio.play();
+
+        music.innerText =
+            "🔊 MUSIC ON";
+
+    }
+
+    else{
+
+        audio.pause();
+
+        music.innerText =
+            "🔇 MUSIC";
+
+    }
+
+};
 
 </script>
 
