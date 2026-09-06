@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dark Gamer Racing</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
+
+<title>🔥 Dark Gamer Racing</title>
+
 
 <style>
+
+/* =========================
+   BASIC
+========================= */
 
 *{
     box-sizing:border-box;
@@ -14,306 +25,737 @@
     padding:0;
 }
 
+html,
 body{
-    background:#050505;
-    font-family:Arial,sans-serif;
-    overflow:hidden;
-    color:white;
-}
 
-/* GAME */
-
-#game{
-    width:360px;
-    height:650px;
-    max-width:100vw;
-    max-height:100vh;
-    margin:auto;
-
-    position:relative;
-    overflow:hidden;
-
-    background:#333;
-
-    border-left:7px solid #00ffff;
-    border-right:7px solid #ff00ff;
-
-    box-shadow:
-        0 0 15px #00ffff,
-        0 0 30px #ff00ff;
-}
-
-/* ROAD */
-
-#road{
-    position:absolute;
     width:100%;
     height:100%;
-    background:#333;
+
+    overflow:hidden;
+
+    background:#050505;
+
+    font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
 }
 
-/* ANIMATED LIGHT */
+body{
 
-#road::after{
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+/* =========================
+   GAME
+========================= */
+
+#game{
+
+    width:360px;
+
+    height:650px;
+
+    max-width:100vw;
+
+    max-height:100vh;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:#222;
+
+    border-left:
+    7px solid #00ffff;
+
+    border-right:
+    7px solid #ff00ff;
+
+    box-shadow:
+
+    0 0 15px #00ffff,
+
+    0 0 30px #ff00ff;
+
+}
+
+
+/* =========================
+   ROAD
+========================= */
+
+#road{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #171717 0%,
+        #343434 12%,
+        #292929 50%,
+        #343434 88%,
+        #171717 100%
+    );
+
+}
+
+
+/* MOVING NEON GLOW */
+
+#road::before{
+
     content:"";
 
     position:absolute;
 
-    width:200%;
-    height:200%;
+    width:180%;
 
-    left:-50%;
-    top:-50%;
+    height:180%;
+
+    left:-40%;
+
+    top:-40%;
 
     background:
-        radial-gradient(
-            circle,
-            rgba(255,0,255,.15),
-            transparent 30%
-        );
+
+    radial-gradient(
+        circle at 20% 30%,
+        rgba(255,0,255,.18),
+        transparent 22%
+    ),
+
+    radial-gradient(
+        circle at 80% 70%,
+        rgba(0,255,255,.18),
+        transparent 22%
+    );
 
     animation:
-        roadGlow 4s infinite alternate;
+
+    neonMove
+    5s
+    ease-in-out
+    infinite
+    alternate;
+
 }
 
-@keyframes roadGlow{
+
+@keyframes neonMove{
 
     0%{
-        transform:rotate(0deg);
-        filter:hue-rotate(0deg);
+
+        transform:
+        rotate(0deg)
+        scale(1);
+
+        filter:
+        hue-rotate(0deg);
+
     }
 
     100%{
-        transform:rotate(20deg);
-        filter:hue-rotate(180deg);
+
+        transform:
+        rotate(15deg)
+        scale(1.25);
+
+        filter:
+        hue-rotate(180deg);
+
     }
+
 }
 
-/* ROAD LINES */
+
+/* =========================
+   ROAD LINES
+========================= */
 
 .line{
+
     position:absolute;
 
-    width:8px;
-    height:90px;
+    width:7px;
 
-    background:white;
+    height:90px;
 
     left:50%;
 
-    transform:translateX(-50%);
+    transform:
+    translateX(-50%);
 
-    box-shadow:0 0 10px white;
+    background:white;
 
-    z-index:2;
+    border-radius:5px;
+
+    box-shadow:
+    0 0 10px white;
+
+    z-index:3;
+
 }
 
-/* TITLE */
+
+/* =========================
+   TITLE
+========================= */
 
 #title{
+
     position:absolute;
 
-    top:45px;
+    top:43px;
 
     width:100%;
 
     text-align:center;
 
+    z-index:30;
+
     font-size:18px;
+
     font-weight:bold;
 
     color:white;
+
+    letter-spacing:2px;
 
     text-shadow:
-        0 0 5px #00ffff,
-        0 0 15px #ff00ff;
 
-    z-index:20;
+    0 0 5px #00ffff,
+
+    0 0 12px #00ffff,
+
+    0 0 20px #ff00ff;
+
 }
 
-/* SCORE */
+
+/* =========================
+   SCORE
+========================= */
 
 #score{
+
     position:absolute;
 
     top:10px;
+
     left:10px;
 
-    background:#000;
+    z-index:35;
+
+    padding:
+    7px 11px;
+
+    background:
+    rgba(0,0,0,.9);
 
     color:#00ffff;
 
-    padding:7px 10px;
+    border:
+    2px solid #00ffff;
 
-    border:2px solid #00ffff;
-
-    border-radius:7px;
+    border-radius:8px;
 
     font-weight:bold;
 
-    z-index:25;
+    box-shadow:
+    0 0 10px #00ffff;
+
 }
 
-/* MUSIC */
+
+/* =========================
+   MUSIC
+========================= */
 
 #music{
+
     position:absolute;
 
     top:10px;
+
     right:10px;
 
-    padding:7px 9px;
+    z-index:35;
 
-    background:#111;
+    padding:
+    7px 9px;
 
     color:#00ffff;
 
-    border:2px solid #00ffff;
+    background:#111;
 
-    border-radius:7px;
+    border:
+    2px solid #00ffff;
 
-    z-index:25;
+    border-radius:8px;
+
+    font-weight:bold;
+
 }
 
-/* PLAYER CAR */
+
+/* =========================
+   SPORTS CAR
+========================= */
 
 #player{
+
     position:absolute;
 
-    width:50px;
-    height:85px;
+    width:60px;
 
-    left:155px;
+    height:96px;
+
+    left:150px;
 
     /*
-       🚗 CAR کو کافی اوپر رکھا گیا
+       CAR اوپر رکھی گئی ہے
     */
-    bottom:155px;
+
+    bottom:190px;
+
+    z-index:15;
+
+    border-radius:
+    16px 16px 11px 11px;
 
     background:
-        linear-gradient(
-            90deg,
-            #b00000,
-            #ff2222,
-            #990000
-        );
 
-    border:3px solid white;
+    linear-gradient(
+        90deg,
+        #420000 0%,
+        #b80000 12%,
+        #ff2020 35%,
+        #ff5555 50%,
+        #d00000 68%,
+        #720000 88%,
+        #350000 100%
+    );
 
-    border-radius:12px;
-
-    z-index:10;
+    border:
+    2px solid white;
 
     box-shadow:
-        0 0 10px red,
-        0 0 25px red;
+
+    0 0 8px #ff0000,
+
+    0 0 20px #ff0000,
+
+    inset 0 0 15px
+    rgba(255,255,255,.2);
 
     transition:
-        left .08s,
-        transform .08s;
+    transform .06s;
+
 }
 
-/* WINDOW */
 
-#player::before{
-    content:"";
+/* CAR CENTER STRIPE */
+
+#player .stripe{
 
     position:absolute;
 
-    width:28px;
-    height:25px;
+    left:26px;
 
-    left:8px;
-    top:8px;
+    top:0;
+
+    width:7px;
+
+    height:100%;
+
+    background:
+    linear-gradient(
+        180deg,
+        #ffffff,
+        #00ffff,
+        #ffffff
+    );
+
+    opacity:.8;
+
+    box-shadow:
+    0 0 6px #00ffff;
+
+}
+
+
+/* FRONT WINDSHIELD */
+
+#player .windshield{
+
+    position:absolute;
+
+    left:9px;
+
+    top:10px;
+
+    width:42px;
+
+    height:27px;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #07131a,
+        #00a9c7,
+        #10232b
+    );
+
+    border:
+    2px solid #bfffff;
+
+    border-radius:
+    9px 9px 5px 5px;
+
+    transform:
+    perspective(30px)
+    rotateX(-5deg);
+
+    box-shadow:
+    0 0 8px #00ffff;
+
+}
+
+
+/* SIDE WINDOWS */
+
+#player .sideWindow{
+
+    position:absolute;
+
+    width:8px;
+
+    height:23px;
+
+    top:13px;
+
+    background:#061016;
+
+    border:
+    1px solid #00ffff;
+
+    border-radius:4px;
+
+}
+
+#player .sideWindow.left{
+
+    left:2px;
+
+}
+
+#player .sideWindow.right{
+
+    right:2px;
+
+}
+
+
+/* SPOILER */
+
+#player .spoiler{
+
+    position:absolute;
+
+    width:54px;
+
+    height:8px;
+
+    left:3px;
+
+    top:-8px;
 
     background:#111;
 
-    border:2px solid #00ffff;
+    border:
+    2px solid #ff00ff;
 
     border-radius:6px;
+
+    box-shadow:
+    0 0 9px #ff00ff;
+
 }
 
-/* LIGHT */
 
-#player::after{
+/* SPOILER SUPPORT */
+
+#player .spoilerSupport{
+
+    position:absolute;
+
+    width:6px;
+
+    height:9px;
+
+    top:-3px;
+
+    background:#555;
+
+}
+
+#player .spoilerSupport.left{
+
+    left:14px;
+
+}
+
+#player .spoilerSupport.right{
+
+    right:14px;
+
+}
+
+
+/* WHEELS */
+
+.wheel{
+
+    position:absolute;
+
+    width:10px;
+
+    height:27px;
+
+    background:#050505;
+
+    border:
+    2px solid #555;
+
+    border-radius:5px;
+
+    box-shadow:
+    0 0 4px #000;
+
+}
+
+.wheel.l1{
+
+    left:-7px;
+
+    top:18px;
+
+}
+
+.wheel.r1{
+
+    right:-7px;
+
+    top:18px;
+
+}
+
+.wheel.l2{
+
+    left:-7px;
+
+    bottom:16px;
+
+}
+
+.wheel.r2{
+
+    right:-7px;
+
+    bottom:16px;
+
+}
+
+
+/* HEADLIGHTS */
+
+.headlight{
+
+    position:absolute;
+
+    width:13px;
+
+    height:7px;
+
+    bottom:8px;
+
+    background:#fffbd0;
+
+    border-radius:5px;
+
+    box-shadow:
+    0 0 8px yellow,
+    0 0 15px white;
+
+}
+
+.headlight.left{
+
+    left:7px;
+
+}
+
+.headlight.right{
+
+    right:7px;
+
+}
+
+
+/* REAR LIGHT */
+
+.rearLight{
+
+    position:absolute;
+
+    width:42px;
+
+    height:4px;
+
+    left:9px;
+
+    top:66px;
+
+    background:#ff0033;
+
+    box-shadow:
+    0 0 8px red;
+
+}
+
+
+/* =========================
+   ENEMY CARS
+========================= */
+
+.enemy{
+
+    position:absolute;
+
+    width:56px;
+
+    height:88px;
+
+    top:-110px;
+
+    z-index:8;
+
+    border-radius:
+    14px;
+
+    border:
+    2px solid white;
+
+    box-shadow:
+    0 0 14px #0088ff;
+
+}
+
+
+.enemy::before{
+
     content:"";
 
     position:absolute;
 
-    width:35px;
-    height:5px;
+    left:9px;
 
-    left:5px;
+    top:9px;
 
-    bottom:7px;
+    width:34px;
 
-    background:#ffff00;
+    height:24px;
 
-    box-shadow:
-        0 0 10px yellow;
+    background:
+    linear-gradient(
+        135deg,
+        #061016,
+        #00a9c7,
+        #071016
+    );
+
+    border:
+    2px solid #8fffff;
+
+    border-radius:7px;
+
 }
 
-/* ENEMY */
 
-.enemy{
-    position:absolute;
-
-    width:50px;
-    height:85px;
-
-    top:-100px;
-
-    border-radius:12px;
-
-    border:3px solid white;
-
-    z-index:5;
-
-    box-shadow:
-        0 0 12px blue;
-}
-
-/* START */
+/* =========================
+   START
+========================= */
 
 #start{
+
     position:absolute;
 
-    z-index:40;
-
     left:50%;
+
     top:50%;
 
-    transform:translate(-50%,-50%);
+    transform:
+    translate(-50%,-50%);
 
-    padding:15px 30px;
+    z-index:50;
 
-    background:#ff0055;
+    padding:
+    16px 27px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #ff0055,
+        #9d00ff,
+        #00ccff
+    );
 
     color:white;
 
-    border:3px solid white;
+    border:
+    3px solid white;
 
-    border-radius:12px;
+    border-radius:14px;
 
-    font-size:20px;
+    font-size:19px;
 
     font-weight:bold;
 
     box-shadow:
-        0 0 15px #ff0055,
-        0 0 30px #ff00ff;
+
+    0 0 15px #ff0055,
+
+    0 0 30px #00ffff;
+
 }
 
-/* CONTROLS */
+
+/* =========================
+   CONTROLS
+========================= */
 
 #controls{
 
     position:absolute;
 
     /*
-       🎮 BUTTONS کو بھی کافی اوپر کیا گیا
+       BUTTONS پہلے سے کافی اوپر
     */
-    bottom:55px;
+
+    bottom:105px;
 
     left:0;
 
@@ -323,175 +765,321 @@ body{
 
     justify-content:space-between;
 
-    padding:0 18px;
+    padding:
+    0 18px;
 
-    z-index:35;
+    z-index:45;
+
 }
+
 
 /* BUTTON */
 
 .control{
 
-    width:110px;
+    width:112px;
+
     height:62px;
 
-    background:rgba(0,0,0,.9);
+    background:
+    linear-gradient(
+        180deg,
+        #181818,
+        #050505
+    );
 
-    color:white;
+    color:#fff;
 
-    border:3px solid #00ffff;
+    border:
+    3px solid #00ffff;
 
-    border-radius:14px;
+    border-radius:16px;
 
-    font-size:30px;
+    font-size:31px;
 
     font-weight:bold;
 
     box-shadow:
-        0 0 12px #00ffff;
+
+    0 0 10px #00ffff,
+
+    inset 0 0 10px
+    rgba(0,255,255,.15);
 
     touch-action:none;
 
     user-select:none;
 
     -webkit-user-select:none;
+
 }
 
-/* BUTTON PRESS */
 
-.control:active{
+/* BUTTON PRESSED */
 
-    transform:scale(.90);
+.control.active{
 
     background:#00ffff;
 
     color:#000;
 
+    transform:
+    scale(.94);
+
+    box-shadow:
+
+    0 0 20px #00ffff,
+
+    0 0 35px #00ffff;
+
 }
 
-/* SMALL PHONE */
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:380px){
 
     #game{
+
         width:100vw;
+
         height:100vh;
+
     }
 
     #player{
-        bottom:145px;
+
+        bottom:185px;
+
     }
 
     #controls{
-        bottom:45px;
+
+        bottom:95px;
+
     }
 
     .control{
-        width:100px;
-        height:58px;
+
+        width:105px;
+
+        height:60px;
+
     }
 
 }
 
-/* VERY SHORT SCREEN */
+
+/* SHORT SCREEN */
 
 @media(max-height:600px){
 
-    #game{
-        height:100vh;
-    }
-
     #player{
-        bottom:125px;
+
+        bottom:165px;
+
     }
 
     #controls{
-        bottom:35px;
+
+        bottom:75px;
+
     }
 
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
 <div id="game">
+
+
+    <!-- ROAD -->
 
     <div id="road">
 
-        <div class="line" style="top:-100px"></div>
-        <div class="line" style="top:100px"></div>
-        <div class="line" style="top:300px"></div>
-        <div class="line" style="top:500px"></div>
+        <div
+        class="line"
+        style="top:-100px">
+        </div>
+
+        <div
+        class="line"
+        style="top:100px">
+        </div>
+
+        <div
+        class="line"
+        style="top:300px">
+        </div>
+
+        <div
+        class="line"
+        style="top:500px">
+        </div>
 
     </div>
+
+
+    <!-- SCORE -->
 
     <div id="score">
         SCORE: 0
     </div>
 
-    <div id="music">
-        🔇 MUSIC
-    </div>
+
+    <!-- TITLE -->
 
     <div id="title">
         🔥 DARK GAMER 🔥
     </div>
 
-    <div id="player"></div>
+
+    <!-- MUSIC -->
+
+    <button id="music">
+        🎧 MUSIC OFF
+    </button>
+
+
+    <!-- SPORTS CAR -->
+
+    <div id="player">
+
+        <div class="spoiler"></div>
+
+        <div
+        class="spoilerSupport left">
+        </div>
+
+        <div
+        class="spoilerSupport right">
+        </div>
+
+        <div class="stripe"></div>
+
+        <div class="windshield"></div>
+
+        <div
+        class="sideWindow left">
+        </div>
+
+        <div
+        class="sideWindow right">
+        </div>
+
+        <div
+        class="wheel l1">
+        </div>
+
+        <div
+        class="wheel r1">
+        </div>
+
+        <div
+        class="wheel l2">
+        </div>
+
+        <div
+        class="wheel r2">
+        </div>
+
+        <div
+        class="headlight left">
+        </div>
+
+        <div
+        class="headlight right">
+        </div>
+
+        <div class="rearLight"></div>
+
+    </div>
+
+
+    <!-- START -->
 
     <button id="start">
         🏁 START RACE
     </button>
+
 
     <!-- CONTROLS -->
 
     <div id="controls">
 
         <button
-            class="control"
-            id="left">
+        class="control"
+        id="left">
+
             ⬅️
+
         </button>
 
+
         <button
-            class="control"
-            id="right">
+        class="control"
+        id="right">
+
             ➡️
+
         </button>
 
     </div>
 
+
 </div>
+
+
+<!-- MUSIC FILE -->
+
+<audio
+id="bgMusic"
+src="phonk.mp3"
+loop>
+</audio>
 
 
 <script>
 
-/* ELEMENTS */
+/* =========================
+   ELEMENTS
+========================= */
 
 const player =
-    document.getElementById("player");
+document.getElementById("player");
 
-const left =
-    document.getElementById("left");
+const leftButton =
+document.getElementById("left");
 
-const right =
-    document.getElementById("right");
+const rightButton =
+document.getElementById("right");
 
-const start =
-    document.getElementById("start");
+const startButton =
+document.getElementById("start");
 
 const scoreBox =
-    document.getElementById("score");
+document.getElementById("score");
 
-const game =
-    document.getElementById("game");
+const musicButton =
+document.getElementById("music");
+
+const music =
+document.getElementById("bgMusic");
 
 
-/* VARIABLES */
+/* =========================
+   VARIABLES
+========================= */
 
-let x = 155;
+let x = 150;
 
 let speed = 5;
 
@@ -501,34 +1089,48 @@ let playing = false;
 
 let enemies = [];
 
-let enemyTimer;
+let enemyTimer = null;
+
+let leftHeld = false;
+
+let rightHeld = false;
+
+let gameRunning = false;
 
 
-/* START */
+/* =========================
+   START
+========================= */
 
-start.onclick = function(){
+startButton.addEventListener(
+"click",
+function(){
 
     playing = true;
+
+    gameRunning = true;
 
     score = 0;
 
     speed = 5;
 
-    x = 155;
+    x = 150;
 
     player.style.left =
-        x + "px";
+    x + "px";
 
     scoreBox.innerText =
-        "SCORE: 0";
+    "SCORE: 0";
 
-    start.style.display =
-        "none";
+    startButton.style.display =
+    "none";
 
 
-    enemies.forEach(function(enemy){
-        enemy.remove();
-    });
+    enemies.forEach(
+        function(enemy){
+            enemy.remove();
+        }
+    );
 
     enemies = [];
 
@@ -540,262 +1142,414 @@ start.onclick = function(){
 
 
     enemyTimer =
-        setInterval(
-            createEnemy,
-            1100
-        );
+    setInterval(
+        createEnemy,
+        1100
+    );
 
 
-    requestAnimationFrame(loop);
+    requestAnimationFrame(
+        gameLoop
+    );
 
-};
+});
 
 
-/* CREATE ENEMY */
+/* =========================
+   CREATE ENEMY
+========================= */
 
 function createEnemy(){
 
-    if(!playing) return;
+    if(!playing){
+        return;
+    }
 
 
     const enemy =
-        document.createElement("div");
+    document.createElement("div");
+
 
     enemy.className =
-        "enemy";
+    "enemy";
 
 
     const lanes =
-        [35,155,275];
+    [30,150,270];
 
 
     const lane =
-        lanes[
-            Math.floor(
-                Math.random()*3
-            )
-        ];
+    lanes[
+        Math.floor(
+            Math.random() *
+            lanes.length
+        )
+    ];
 
 
     enemy.style.left =
-        lane + "px";
+    lane + "px";
 
 
     enemy.style.top =
-        "-100px";
+    "-110px";
 
 
-    const colors = [
-        "#0066ff",
-        "#ff00aa",
-        "#00cc66",
-        "#ff6600"
+    const colors =
+    [
+        "#075dff",
+        "#e5008a",
+        "#00a85a",
+        "#ff6500",
+        "#7b00ff"
     ];
 
 
     enemy.style.background =
-        colors[
-            Math.floor(
-                Math.random()*colors.length
-            )
-        ];
+    colors[
+        Math.floor(
+            Math.random() *
+            colors.length
+        )
+    ];
 
 
-    game.appendChild(enemy);
+    document
+    .getElementById("game")
+    .appendChild(enemy);
+
 
     enemies.push(enemy);
 
 }
 
 
-/* MOVE LEFT */
+/* =========================
+   HOLD LEFT
+========================= */
 
-function moveLeft(){
+function startLeft(e){
 
-    if(!playing) return;
-
-    x -= 20;
-
-
-    if(x < 15){
-        x = 15;
+    if(e){
+        e.preventDefault();
     }
 
+    if(!playing){
+        return;
+    }
 
-    player.style.left =
-        x + "px";
+    leftHeld = true;
 
-
-    player.style.transform =
-        "rotate(-7deg)";
+    leftButton.classList.add(
+        "active"
+    );
 
 }
 
 
-/* MOVE RIGHT */
+/* =========================
+   HOLD RIGHT
+========================= */
 
-function moveRight(){
+function startRight(e){
 
-    if(!playing) return;
-
-    x += 20;
-
-
-    if(x > 295){
-        x = 295;
+    if(e){
+        e.preventDefault();
     }
 
+    if(!playing){
+        return;
+    }
 
-    player.style.left =
-        x + "px";
+    rightHeld = true;
 
-
-    player.style.transform =
-        "rotate(7deg)";
+    rightButton.classList.add(
+        "active"
+    );
 
 }
 
 
-/* MOBILE LEFT */
+/* =========================
+   RELEASE
+========================= */
 
-left.addEventListener(
-    "pointerdown",
-    function(e){
+function stopSteering(){
 
-        e.preventDefault();
+    leftHeld = false;
 
-        moveLeft();
+    rightHeld = false;
 
-    }
+    leftButton.classList.remove(
+        "active"
+    );
+
+    rightButton.classList.remove(
+        "active"
+    );
+
+}
+
+
+/* =========================
+   TOUCH / POINTER
+========================= */
+
+leftButton.addEventListener(
+"pointerdown",
+startLeft
 );
 
 
-/* MOBILE RIGHT */
-
-right.addEventListener(
-    "pointerdown",
-    function(e){
-
-        e.preventDefault();
-
-        moveRight();
-
-    }
+rightButton.addEventListener(
+"pointerdown",
+startRight
 );
 
 
-/* KEYBOARD */
+window.addEventListener(
+"pointerup",
+stopSteering
+);
 
-document.addEventListener(
-    "keydown",
-    function(e){
 
-        if(e.key === "ArrowLeft"){
+window.addEventListener(
+"pointercancel",
+stopSteering
+);
 
-            e.preventDefault();
 
-            moveLeft();
+/* =========================
+   KEYBOARD
+========================= */
+
+window.addEventListener(
+"keydown",
+function(e){
+
+    if(e.key === "ArrowLeft"){
+
+        startLeft();
+
+    }
+
+
+    if(e.key === "ArrowRight"){
+
+        startRight();
+
+    }
+
+});
+
+
+window.addEventListener(
+"keyup",
+function(e){
+
+    if(
+        e.key === "ArrowLeft" ||
+        e.key === "ArrowRight"
+    ){
+
+        stopSteering();
+
+    }
+
+});
+
+
+/* =========================
+   SMOOTH STEERING
+========================= */
+
+function steeringLoop(){
+
+    if(
+        playing &&
+        gameRunning
+    ){
+
+        if(leftHeld){
+
+            x -= 6;
 
         }
 
 
-        if(e.key === "ArrowRight"){
+        if(rightHeld){
 
-            e.preventDefault();
-
-            moveRight();
+            x += 6;
 
         }
 
-    }
-);
+
+        /* ROAD LIMIT */
+
+        if(x < 12){
+
+            x = 12;
+
+        }
 
 
-/* RESET ROTATION */
+        if(x > 290){
 
-document.addEventListener(
-    "pointerup",
-    function(){
+            x = 290;
 
-        player.style.transform =
+        }
+
+
+        player.style.left =
+        x + "px";
+
+
+        /* CAR TILT */
+
+        if(leftHeld){
+
+            player.style.transform =
+            "rotate(-8deg)";
+
+        }
+
+        else if(rightHeld){
+
+            player.style.transform =
+            "rotate(8deg)";
+
+        }
+
+        else{
+
+            player.style.transform =
             "rotate(0deg)";
 
+        }
+
     }
+
+
+    requestAnimationFrame(
+        steeringLoop
+    );
+
+}
+
+
+requestAnimationFrame(
+    steeringLoop
 );
 
 
-/* GAME LOOP */
+/* =========================
+   GAME LOOP
+========================= */
 
-function loop(){
+function gameLoop(){
 
-    if(!playing) return;
+    if(!playing){
+
+        return;
+
+    }
 
 
     /* ROAD */
 
     document
     .querySelectorAll(".line")
-    .forEach(function(line){
+    .forEach(
+        function(line){
 
-        let y =
+            let y =
             parseFloat(
                 line.style.top
             );
 
 
-        y += speed;
+            y += speed;
 
 
-        if(y > 650){
-            y = -100;
-        }
+            if(y > 650){
+
+                y = -100;
+
+            }
 
 
-        line.style.top =
+            line.style.top =
             y + "px";
 
-    });
+        }
+    );
 
 
     /* ENEMIES */
 
     for(
-        let i = enemies.length - 1;
+        let i =
+        enemies.length - 1;
+
         i >= 0;
+
         i--
     ){
 
         const enemy =
-            enemies[i];
+        enemies[i];
 
 
         let y =
-            parseFloat(
-                enemy.style.top
-            );
+        parseFloat(
+            enemy.style.top
+        );
 
 
         y += speed;
 
 
         enemy.style.top =
-            y + "px";
+        y + "px";
 
 
         /* COLLISION */
 
-        const p =
-            player.getBoundingClientRect();
+        const playerBox =
+        player.getBoundingClientRect();
 
-        const e =
-            enemy.getBoundingClientRect();
+
+        const enemyBox =
+        enemy.getBoundingClientRect();
+
+
+        const margin = 8;
 
 
         if(
-            p.left < e.right &&
-            p.right > e.left &&
-            p.top < e.bottom &&
-            p.bottom > e.top
+
+            playerBox.left + margin
+            <
+            enemyBox.right - margin
+
+            &&
+
+            playerBox.right - margin
+            >
+            enemyBox.left + margin
+
+            &&
+
+            playerBox.top + margin
+            <
+            enemyBox.bottom - margin
+
+            &&
+
+            playerBox.bottom - margin
+            >
+            enemyBox.top + margin
+
         ){
 
             gameOver();
@@ -817,12 +1571,17 @@ function loop(){
 
 
             scoreBox.innerText =
-                "SCORE: " + score;
+            "SCORE: " + score;
 
 
-            if(score % 5 === 0){
+            /* SPEED */
 
-                speed += 0.5;
+            if(
+                score > 0 &&
+                score % 5 === 0
+            ){
+
+                speed += .5;
 
             }
 
@@ -831,29 +1590,93 @@ function loop(){
     }
 
 
-    requestAnimationFrame(loop);
+    requestAnimationFrame(
+        gameLoop
+    );
 
 }
 
 
-/* GAME OVER */
+/* =========================
+   GAME OVER
+========================= */
 
 function gameOver(){
 
     playing = false;
 
-    clearInterval(enemyTimer);
+    gameRunning = false;
+
+    leftHeld = false;
+
+    rightHeld = false;
+
+    stopSteering();
+
+    clearInterval(
+        enemyTimer
+    );
+
 
     alert(
         "💥 GAME OVER!\n\n" +
-        "🏆 SCORE: " + score
+        "🏆 SCORE: " +
+        score
     );
+
 
     location.reload();
 
 }
 
+
+/* =========================
+   MUSIC
+========================= */
+
+musicButton.addEventListener(
+"click",
+function(){
+
+    if(
+        music.paused
+    ){
+
+        music.play()
+        .then(
+            function(){
+
+                musicButton.innerText =
+                "🔊 MUSIC ON";
+
+            }
+        )
+        .catch(
+            function(){
+
+                alert(
+                    "🎧 پہلے GitHub میں اپنی phonk.mp3 فائل upload کریں۔"
+                );
+
+            }
+        );
+
+    }
+
+    else{
+
+        music.pause();
+
+        musicButton.innerText =
+        "🎧 MUSIC OFF";
+
+    }
+
+});
+
 </script>
 
+
 </body>
+
 </html>
