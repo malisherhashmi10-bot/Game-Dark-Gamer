@@ -14,3 +14,122 @@
 
 </body>
 </html>
+<style>
+  body {
+    margin: 0;
+    background: #080808;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+
+  #game {
+    width: 360px;
+    height: 600px;
+    margin: 20px auto;
+    background: #333;
+    position: relative;
+    overflow: hidden;
+    border: 5px solid #111;
+  }
+
+  #player {
+    width: 50px;
+    height: 90px;
+    background: red;
+    position: absolute;
+    bottom: 20px;
+    left: 155px;
+    border-radius: 10px;
+  }
+</style>
+<h1>Scary Racing Game</h1>
+<div id="game">
+
+  <div id="road"></div>
+
+  <div id="player"></div>
+
+  <div id="score">
+    Score: 0
+  </div>
+
+  <button id="startBtn">
+    START GAME
+  </button>
+
+</div>
+<script>
+
+let player = document.getElementById("player");
+let scoreBox = document.getElementById("score");
+let startBtn = document.getElementById("startBtn");
+
+let playerX = 155;
+let score = 0;
+let gameRunning = false;
+
+startBtn.onclick = function () {
+
+  gameRunning = true;
+  score = 0;
+
+  startBtn.style.display = "none";
+
+  scoreBox.innerText = "Score: 0";
+
+  playerX = 155;
+  player.style.left = playerX + "px";
+
+};
+
+document.addEventListener("keydown", function(event) {
+
+  if (!gameRunning) return;
+
+  if (event.key === "ArrowLeft") {
+
+    playerX -= 20;
+
+  }
+
+  if (event.key === "ArrowRight") {
+
+    playerX += 20;
+
+  }
+
+  if (playerX < 10) {
+    playerX = 10;
+  }
+
+  if (playerX > 300) {
+    playerX = 300;
+  }
+
+  player.style.left = playerX + "px";
+
+});
+
+</script>
+
+let enemies = [];
+
+function createEnemy() {
+
+  let enemy = document.createElement("div");
+
+  enemy.className = "enemy";
+
+  let lanes = [45, 155, 265];
+
+  let randomLane =
+    lanes[Math.floor(Math.random() * lanes.length)];
+
+  enemy.style.left = randomLane + "px";
+  enemy.style.top = "-100px";
+
+  document.getElementById("game").appendChild(enemy);
+
+  enemies.push(enemy);
+}
